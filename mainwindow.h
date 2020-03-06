@@ -14,14 +14,14 @@ public:
     ~MainWindow();
 
 private:
-    QList<QPushButton *> userList;
+    QList<QPushButton *>userlist;
     QPropertyAnimation *animation;
     QWidget *userView;
-    QList<QPushButton *> userList;
+
 
     void initView();
     void initUserList(int count);
-    void alignedView();
+    void setCurrentUser(int count);
 
 
 };
