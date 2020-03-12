@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     initView();
     installEventFilter(this);
     setFocusPolicy(Qt::StrongFocus);
+    setFocus();
 }
 
 MainWindow::~MainWindow()
@@ -33,7 +34,7 @@ void MainWindow::initView()
     userView->setFocusPolicy(Qt::NoFocus);
     userView->installEventFilter(this);
 
-    setCurrentUser(1);
+    setCurrentUser(9);
 }
 
 void MainWindow::initUserList(int count)
@@ -139,14 +140,14 @@ void MainWindow::leftToRight()
     if(left >= 2){
         QPushButton *button2 = userlist.at(currentUser - 2);
         rec1 = button2->geometry();
-        rec2 = QRect(ITEM_WIDTH,0,ITEM_WIDTH,ITEM_HEIGHT);
+        rec2 = QRect(ITEM_WIDTH,ITEM_HEIGHT-FACE_WIDTH,FACE_WIDTH,FACE_WIDTH);
 
         moveAnimation(button2,rec1,rec2);
     }
 
     if(left >= 3){
         QPushButton *button3 = userlist.at(currentUser - 3);
-        button3->setGeometry(0,ITEM_HEIGHT-FACE_WIDTH,ITEM_WIDTH,ITEM_HEIGHT);
+        button3->setGeometry(0,ITEM_HEIGHT-FACE_WIDTH,FACE_WIDTH,FACE_WIDTH);
         button3->show();
     }
 }
@@ -167,15 +168,15 @@ void MainWindow::rightToLeft()
         QPushButton *button2 = userlist.at(currentUser + 2);
         rec1 = button2->geometry();
         rec2 = QRect(ITEM_WIDTH*3+ITEM_WIDTH-FACE_WIDTH,
-                     0,
-                     ITEM_WIDTH,
-                     ITEM_HEIGHT);
+                     ITEM_HEIGHT-FACE_WIDTH,
+                     FACE_WIDTH,
+                     FACE_WIDTH);
         moveAnimation(button2,rec1,rec2);
     }
 
     if(right >= 3){
         QPushButton *button3 = userlist.at(currentUser + 3);
-        button3->setGeometry(0,ITEM_HEIGHT-FACE_WIDTH,ITEM_WIDTH,ITEM_HEIGHT);
+        button3->setGeometry(ITEM_WIDTH*4+ITEM_WIDTH-FACE_WIDTH,ITEM_HEIGHT-FACE_WIDTH,FACE_WIDTH,FACE_WIDTH);
         button3->show();
     }
 }
@@ -204,7 +205,7 @@ void MainWindow::rightToRight()
 void MainWindow::moveAnimation(QPushButton *button, QRect preRect, QRect nextRect)
 {
     QPropertyAnimation *pScaleAnimation = new QPropertyAnimation(button, "geometry");
-    pScaleAnimation->setDuration(500);
+    pScaleAnimation->setDuration(300);
     pScaleAnimation->setStartValue(preRect);
     pScaleAnimation->setEndValue(nextRect);
     pScaleAnimation->setEasingCurve(QEasingCurve::InOutQuad);
