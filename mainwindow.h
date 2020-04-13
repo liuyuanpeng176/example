@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QList>
 #include <QPushButton>
+#include <QPair>
 #include <QPropertyAnimation>
 #include <QKeyEvent>
 
@@ -16,10 +17,13 @@ public:
     ~MainWindow();
 
 private:
-    QList<QPushButton *>userlist;
+
+    QList<QPair<QPushButton *, QPair<int ,int>>> userlist;
     QPropertyAnimation *animation;
     QWidget *userView;
     int currentUser;
+    int leftCount;
+    int rightCount;
 
 
     void initView();
